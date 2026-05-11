@@ -1,33 +1,54 @@
-public static class Arrays
-{
-    /// <summary>
-    /// This function will produce an array of size 'length' starting with 'number' followed by multiples of 'number'.  For 
-    /// example, MultiplesOf(7, 5) will result in: {7, 14, 21, 28, 35}.  Assume that length is a positive
-    /// integer greater than 0.
-    /// </summary>
-    /// <returns>array of doubles that are the multiples of the supplied number</returns>
-    public static double[] MultiplesOf(double number, int length)
-    {
-        // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+using System;
+using System.Collections.Generic;
 
-        return []; // replace this return statement with your own
+class Program
+{    
+    static void Main()
+    {
+        //Multiples of 12(5 numbers)
+        var multiplesof12 = MultiplesOf(12,5);
+        Console.WriteLine("Multiples of 12: " + string.Join(", ", multiplesof12));
+
+        //Multiples of 7(5 numbers)
+        var multiplesof7 = MultiplesOf(7,5);
+        Console.WriteLine("Multiples of 7: " + string.Join(", ", multiplesof7));
+
+        //Multiples of 5(5 numbers)
+        var multiplesof5 = MultiplesOf(5,5);
+        Console.WriteLine("Multiples of 5: " + string.Join(", ", multiplesof5));
+    
+    // RotateRight example
+    var numbers = new List<int>{1,2, 3, 4, 5};
+    RotateRight(numbers, 2);
+    Console.WriteLine("Original list: " + string.Join(", ", numbers));
+    Console.WriteLine("Rotated list: " + string.Join(", ", numbers));
     }
 
-    /// <summary>
-    /// Rotate the 'data' to the right by the 'amount'.  For example, if the data is 
-    /// List<int>{1, 2, 3, 4, 5, 6, 7, 8, 9} and an amount is 3 then the list after the function runs should be 
-    /// List<int>{7, 8, 9, 1, 2, 3, 4, 5, 6}.  The value of amount will be in the range of 1 to data.Count, inclusive.
-    ///
-    /// Because a list is dynamic, this function will modify the existing data list rather than returning a new list.
-    /// </summary>
-    public static void RotateListRight(List<int> data, int amount)
+
+     private static double[] MultiplesOf(int start, int count)
     {
-        // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        var result = new double[count];
+
+        for (int i=1; i<= count; i++)
+        {
+            result[i-1] = start * i;
+        }
+        return result;
+    }
+
+    private static List<int> RotateRight(List<int> data, int amount)
+    {
+        amount = amount % data.Count;
+        var endPart = data.GetRange(data.Count - amount, amount);
+        var startPart = data.GetRange(0, data.Count - amount);
+
+        data.Clear();
+        data.AddRange(endPart);
+        data.AddRange(startPart);
+
+        return data;
     }
 }
+
+
+
