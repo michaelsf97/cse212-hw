@@ -17,11 +17,11 @@ class Program
         var multiplesof5 = MultiplesOf(5,5);
         Console.WriteLine("Multiples of 5: " + string.Join(", ", multiplesof5));
     
-    // RotateRight example
-    var numbers = new List<int>{1,2, 3, 4, 5};
-    RotateRight(numbers, 2);
-    Console.WriteLine("Original list: " + string.Join(", ", numbers));
-    Console.WriteLine("Rotated list: " + string.Join(", ", numbers));
+        // RotateRight example
+        var numbers = new List<int>{1,2, 3, 4, 5};
+        RotateRight(numbers, 2);
+        Console.WriteLine("Original list: " + string.Join(", ", numbers));
+        Console.WriteLine("Rotated list: " + string.Join(", ", numbers));
     }
 
 
