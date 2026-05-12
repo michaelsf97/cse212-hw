@@ -49,7 +49,7 @@ public static class Arrays
 // This class handles the actual execution
 class Program
 {
-    static void Main()
+    static void MainOld()
     {
         // Test Multiples 
         var m12 = Arrays.MultiplesOf(12, 5);
