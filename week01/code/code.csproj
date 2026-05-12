@@ -1,12 +1,12 @@
 
 <Project Sdk="Microsoft.NET.Sdk">
-   <PropertyGroup>
-   <OutputType>Exe</OutputType>
-    <TargetFramework>net10.0</TargetFramework>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework> <!-- Asegúrate de tener instalado el SDK de .NET 10 -->
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
 
-    <StartupObject>Program</StartupProject>
+    <StartupObject>Program</StartupObject> <!-- Corregido aquí -->
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
