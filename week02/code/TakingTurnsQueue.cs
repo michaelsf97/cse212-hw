@@ -37,12 +37,27 @@ public class TakingTurnsQueue
         {
             throw new InvalidOperationException("No one in the queue.");
         }
-        else
+        
         {
             Person person = _people.Dequeue();
-            if (person.Turns > 1)
+            // 1. If turns are >0, they are "Finite" and need to be decremented.
+            // 2. If turns are <=0, they are "Infinite" and should not be decremented.
+            if (person.Turns > 0)
             {
                 person.Turns -= 1;
+
+                // If they still have turns left, they go to the back of the line.
+                if (person.Turns > 0)
+                {
+                    _people.Enqueue(person);
+                }
+                
+            }
+
+            else
+            {
+                // If turns were <=0 (Infinite), they MUST be re-added every time 
+                // because their turn count never decreases.
                 _people.Enqueue(person);
             }
 
