@@ -20,6 +20,7 @@ public class TakingTurnsQueue
     /// <param name="turns">Number of turns remaining</param>
     public void AddPerson(string name, int turns)
     {
+        // you MUST create a new person and add them to the END of the queue
         var person = new Person(name, turns);
         _people.Enqueue(person);
     }
