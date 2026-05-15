@@ -14,6 +14,7 @@ public class TakingTurnsQueueTests
     // Defect(s) Found: Queue does not maintain correct FIFO order.
     // Logic fails to re-add players to the back of the line correctly,
     // resulting in incorrect turn rotation.
+    // Corrected and now it is None (this test passes successfully).
     public void TestTakingTurnsQueue_FiniteRepetition()
     {
         var bob = new Person("Bob", 2);
@@ -47,6 +48,7 @@ public class TakingTurnsQueueTests
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, George, Sue, Tim, George, Tim, George
     // Defect(s) Found: Queue order is disrupted when new players are added.
     // Expected Bob, but received Sue, indicating improper queue management.
+    // Corrected and now it is None (this test passes successfully).
     public void TestTakingTurnsQueue_AddPlayerMidway()
     {
         var bob = new Person("Bob", 2);
@@ -90,6 +92,7 @@ public class TakingTurnsQueueTests
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
     // Defect(s) Found: Logic fails to filter players with 0 turns.
     // Players with 0 turns are being processed instead of being excluded from the queue.
+    // Corrected and now it is None (this test passes successfully).
     public void TestTakingTurnsQueue_ForeverZero()
     {
         var timTurns = 0;
@@ -123,6 +126,7 @@ public class TakingTurnsQueueTests
     // Defect(s) Found: Logic fails to filter players with negative turns.
     // Players with negative turns remain in the queue indefinitely,
     // instead of being excluded or treated as infinite.
+    // Corrected and now it is None (this test passes successfully).
     public void TestTakingTurnsQueue_ForeverNegative()
     {
         var timTurns = -3;
