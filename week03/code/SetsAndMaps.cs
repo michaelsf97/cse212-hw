@@ -23,25 +23,31 @@ public static class SetsAndMaps
 
 
     {
-
+          // This set tracks words we have already seen. But have not matched yet.
         var seenSet = new HashSet<string>();
         var results = new List<string>();
 
         foreach (var word in words)
         {
+            //1. Instantly reverse the 2-letter word.
             string reversedWord = $"{word[1]}{word[0]}";
 
+            //2. Special case check: If characters are identical (like 'bb') then skip the word.
             if (word == reversedWord)
 
             {
                 continue;
             }
+
+            //3. If we have already seen its mirror image in our history, we have a pair!.
             if (seenSet.Contains(reversedWord))
             {
                 results.Add($"{word} & {reversedWord}");
             }
             else
             {
+
+                //Otherwise save this word to save it later.
                 seenSet.Add(word);
             }
         }
