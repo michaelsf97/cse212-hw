@@ -23,38 +23,42 @@ public static class SetsAndMaps
 
 
     {
-          // This set tracks words we have already seen. But have not matched yet.
-        var seenSet = new HashSet<string>();
+          // This load all words in this set instantly
+        var wordSet = new HashSet<string>(words);
         var results = new List<string>();
-
+        
+        // Search pairs asymmetric 
         foreach (var word in words)
         {
-            //1. Instantly reverse the 2-letter word.
-            string reversedWord = $"{word[1]}{word[0]}";
-
-            //2. Special case check: If characters are identical (like 'bb') then skip the word.
-            if (word == reversedWord)
-
+            // If the word was paired and erase out, release it.
+            if (!wordSet.Contains(word))
             {
                 continue;
             }
 
-            //3. If we have already seen its mirror image in our history, we have a pair!.
-            if (seenSet.Contains(reversedWord))
-
-            if (word[0] < reversedWord[0])
+            string reverseWord = $"{word[1]}{word[0]}";
+            // Special Case: Bypass words where letters are same  like 'bb'.
+            if (word == reverseWord)
             {
-                results.Add($"{word} & {reversedWord}");
+                continue;
             }
-            else
-            {
 
-                //Otherwise save this word to save it later.
-                seenSet.Add(word);
+            if (wordSet.Contains(reverseWord))
+            {
+                if(word[0] < reverseWord[0])
+                {
+                    results.Add($"{word} & {reverseWord}");
+                }
+                else
+                {
+                    results.Add($"{reverseWord} & {word}");
+                }
+
+                // Remove the pair from the set to avoid re-processing.
+                wordSet.Remove(word);
+                wordSet.Remove(reverseWord);
             }
         }
-        
-
 
 
         
