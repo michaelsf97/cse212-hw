@@ -41,6 +41,8 @@ public static class SetsAndMaps
 
             //3. If we have already seen its mirror image in our history, we have a pair!.
             if (seenSet.Contains(reversedWord))
+
+            if (word[0] < reversedWord[0])
             {
                 results.Add($"{word} & {reversedWord}");
             }
