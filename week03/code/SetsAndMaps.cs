@@ -55,7 +55,7 @@ public static class SetsAndMaps
 
 
 
-        // TODO Problem 1 - ADD YOUR CODE HERE
+        
         return results.ToArray();
     }
 
@@ -75,12 +75,37 @@ public static class SetsAndMaps
         var degrees = new Dictionary<string, int>();
         foreach (var line in File.ReadLines(filename))
         {
-            var fields = line.Split(",");
-            // TODO Problem 2 - ADD YOUR CODE HERE
+            //1. Split the comma-separated line into fields.
+            string[] fields = line.Split(",");
+
+            // Safety check: make sure the line actually has enough columns
+
+            if (fields.Length >= 4)
+            {
+
+                //2. Extract column 4 (index 3) and trim any accidental spaces.
+                string degree = fields[3].Trim();
+                
+                //3. Updates the dictionary count using hashing logic
+            if (degrees.ContainsKey(degree))
+            {
+
+                //4. If its already there, increment the count by 1.
+                degrees[degree]++;
+            }
+            else
+            {
+                //5. If it's a brand new degree, start it at 1.
+                degrees[degree] = 1;
+            }
+            
+            
         }
 
-        return degrees;
+        
     }
+        return degrees;
+     }
 
     /// <summary>
     /// Determine if 'word1' and 'word2' are anagrams.  An anagram
