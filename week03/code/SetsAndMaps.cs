@@ -131,9 +131,61 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
+        var letterCounts = new Dictionary<char, int>();
+
+        //1. Register and clean letters in word1
+        foreach (char c in word1.ToLower())
+        {
+            //Ignore spaces according instructions
+            if (c == ' ')
+            {
+                continue;
+            }
+
+            if (letterCounts.ContainsKey(c))
+            {
+                letterCounts[c]++;
+            }
+            else
+            {
+                letterCounts[c] = 1;
+            }
+        }
+
+
+            // 2. Reduce letters in word2
+            foreach (char c in word2.ToLower())
+            {
+                if (c ==  ' ')
+                {
+                    continue;
+                }
+
+                // If word2 does have a letter that did not appear in word1, this is not an anagram.
+                if (!letterCounts.ContainsKey(c))
+                {
+                    return false;
+                }
+
+                letterCounts[c]--;
+
+            }
+
+            // 3. Check if all functions are balanced in 0.
+            foreach (var pair in letterCounts)
+            {
+                if(pair.Value != 0)
+                {
+                    return false;
+                }
+            }
+
+            // If al filters are passed, !It is a perfect anagram!
+
+            return true;
+        }
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
-    }
+    
 
     /// <summary>
     /// This function will read JSON (Javascript Object Notation) data from the 
