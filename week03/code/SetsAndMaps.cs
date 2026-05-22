@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 
 public static class SetsAndMaps
@@ -209,15 +210,44 @@ public static class SetsAndMaps
         using var jsonStream = client.Send(getRequestMessage).Content.ReadAsStream();
         using var reader = new StreamReader(jsonStream);
         var json = reader.ReadToEnd();
-        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        return EarthquakeDailySummary(json);
+    }
 
-        var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
+        public static string[] EarthquakeDailySummary(string json)
+    {
+        // 1. We are using the mold step 1 to open text JSON automatic form.
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true};
+        var data = JsonSerializer.Deserialize<FeatureCollection>(json, options);
+
+        var results = new List<string>();
+
+        if (data == null || data.features == null)
+        {
+            return results.ToArray();
+        }
+
+        // 2.  We are reviewing each earthquake one by one
+        foreach (var feature in data.features)
+        {
+            if (feature.properties != null)
+            {
+                string place = feature.properties.place;
+                double magnitude = feature.properties.mag;
+
+                // 3. Save it in a clean text.
+                results.Add($"{place} - Mag {magnitude}");
+            }
+        }
+
+        // 4. We return result to a teacher
+        return results.ToArray();
+    }
 
         // TODO Problem 5:
         // 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
         // on those classes so that the call to Deserialize above works properly.
-        // 2. Add code below to create a string out each place a earthquake has happened today and its magitude.
+        // 2. Add code below to create a string out each place a earthquake has happened today and its magnitude.
         // 3. Return an array of these string descriptions.
-        return [];
+
+    
     }
-}
