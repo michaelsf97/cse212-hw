@@ -33,6 +33,18 @@ public class Maze
     public void MoveLeft()
     {
         // FILL IN CODE
+        // Searching addresses with permission to move to our current coordinates.
+        bool[] directions = _mazeMap[(_currX, _currY)];
+
+        // index 0 is left.
+        if (directions[0])
+        {
+            _currX--; // Move to left reduces x -1
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -42,6 +54,17 @@ public class Maze
     public void MoveRight()
     {
         // FILL IN CODE
+        bool[] directions = _mazeMap[(_currX, _currY)];
+
+        // Index 1 is 'right'.
+        if (directions[1])
+        {
+            _currX++; // Move to right increases X + 1
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -51,6 +74,18 @@ public class Maze
     public void MoveUp()
     {
         // FILL IN CODE
+        bool[] directions = _mazeMap[(_currX, _currY)];
+
+        // Index 2 is 'up'.
+        if (directions[2])
+        {
+            _currY--; // Coordinates in the programming graticule system, moving up reduces Y -1.
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+
     }
 
     /// <summary>
@@ -60,6 +95,18 @@ public class Maze
     public void MoveDown()
     {
         // FILL IN CODE
+
+        bool[] directions = _mazeMap[(_currX, _currY)];
+
+        // Index 3 es 'down'.
+        if (directions[3])
+        {
+            _currY++; // Going down increases Y + 1.
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     public string GetStatus()
