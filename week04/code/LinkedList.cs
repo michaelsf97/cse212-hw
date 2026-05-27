@@ -93,8 +93,8 @@ public class LinkedList : IEnumerable<int>
         // will be affected.
         else if (_tail is not null)
         {
-            _tail.Prev!.Next = null; // Disconnect the second-to-last node from the last node
-            _tail = _tail.Prev; // Update the tail to point to the second-to-last node
+            _tail = _tail.Prev; // Disconnect the second-to-last node from the last node
+            _tail!.Next = null; // ¡CRUCIAL! Disconnect the last node to the next one, inserting null.
         }
     }
 
@@ -139,6 +139,42 @@ public class LinkedList : IEnumerable<int>
     /// </summary>
     public void Remove(int value)
     {
+        Node ? current = _head;
+
+        while (current is not null)
+        {
+            if (current.Data == value)
+            {
+                //1. If this is the unique method or if it is the head (Head)
+
+                if (current == _head)
+                {
+                    _head = current.Next;
+                    if (_head is not null) _head.Prev = null;
+                    if (current == _tail) _tail = null; // If this was the unique, tail is null too.
+                }
+
+                // 2. If this is the last node Tail (Tail)
+                else if (current == _tail)
+                {
+                    _tail = current.Prev;
+                    if (_tail is not null) _tail.Next = null;
+                }
+
+                //3. If this is in the middle (Middle) 
+                else
+                {
+                    current.Next!.Prev = current.Prev;
+                    current.Prev!.Next = current.Next;
+                }
+                return; // we found and erased out and get out from the middle.
+
+            }
+            current = current.Next; // Move forward next node.
+        }
+        
+            
+        
         // TODO Problem 3
     }
 
@@ -147,6 +183,16 @@ public class LinkedList : IEnumerable<int>
     /// </summary>
     public void Replace(int oldValue, int newValue)
     {
+        Node? current = _head; 
+
+        while (current is not null)
+        {
+            if (current.Data == oldValue)
+            {
+                current.Data = newValue; // Replace the value directly.
+            }
+            current = current.Next; // Move forward next node.
+        }
         // TODO Problem 4
     }
 
@@ -177,8 +223,16 @@ public class LinkedList : IEnumerable<int>
     /// </summary>
     public IEnumerable Reverse()
     {
+        // Get started at the end.
+        Node? current = _tail;
+
+        // While we do not go off to the end of the list.
+        while (current is not null)
+        {
+            yield return current.Data; // Return the current data one by one.
+            current = current.Prev; // Move backward to the previous node.
+        }
         // TODO Problem 5
-        yield return 0; // replace this line with the correct yield return statement(s)
     }
 
     public override string ToString()
