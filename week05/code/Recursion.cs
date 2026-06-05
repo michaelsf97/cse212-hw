@@ -184,6 +184,8 @@ public static class Recursion
     /// </summary>
     public static void SolveMaze(List<string> results, Maze maze, int x = 0, int y = 0, List<ValueTuple<int, int>>? currPath = null)
     {
+
+
         // If this is the first time running the function, then we need
         // 1. to initialize the currPath list.
         if (currPath == null) 
@@ -210,7 +212,7 @@ public static class Recursion
         if (maze.IsEnd(x, y))
         {
             // Convert the list of tuples into a string matching your handout format: (0,0) -> (1,0) -> (2,0)
-            string formattedPath = string.Join(" -> ", currPath.Select(coord => $"({coord.Item1}, {coord.Item2})"));
+            string formattedPath = "<List>{"  + string.Join(", ", currPath.Select(coord => $"({coord.Item1}, {coord.Item2})")) + "}";
             results.Add(formattedPath);
 
         }
@@ -225,11 +227,5 @@ public static class Recursion
 
         // 7. Unchoose: Remove this step so other path explorations can use it
         currPath.RemoveAt(currPath.Count - 1);
-        // currPath.Add((1,2)); // Use this syntax to add to the current path
-
-        // TODO Start Problem 5
-        // ADD CODE HERE
-
-        // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
     }
 }
