@@ -70,3 +70,26 @@ public static class Trees
         // TODO Start Problem 5
     }
 }
+
+public static string DoSomething(string text)
+{
+    var newText = "" ;
+    foreach (var letter in text)
+    {
+        if (letter != ' ')
+        {
+            var newLetter = (char)(letter + 1);
+            newText += newLetter;
+        }
+        else
+        {
+            newText += letter;
+        }
+        return newText;
+    }
+    return newText;
+}
+
+using System;
+using System.Collections.Generic;
+
